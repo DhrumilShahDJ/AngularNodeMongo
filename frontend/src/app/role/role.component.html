@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+<section>
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="level">
+      <th mat-header-cell *matHeaderCellDef>Level</th>
+      <td mat-cell *matCellDef="let element">{{ element.level.priority }}</td>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-raised-button
+          class="button-class"
+          color="primary"
+          *ngIf="element.level.priority !== 2"
+          (click)="openEditDialog(element)"
+        >
+          Edit
+        </button>
+        <button
+          mat-raised-button
+          class="button-class"
+          color="warn"
+          *ngIf="element.level.priority !== 2"
+          (click)="delete(element)"
+        >
+          Delete
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <mat-paginator
+    [length]="length"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</section>

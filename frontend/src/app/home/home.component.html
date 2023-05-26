@@ -1,0 +1,15 @@
+<app-navbar></app-navbar>
+<section class="dashboard">
+  <mat-card *ngIf="role === 1" class="item" routerLink="/admin">
+    <mat-card-content>Admin</mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="role === 1" class="item" routerLink="/role">
+    <mat-card-content>Role</mat-card-content>
+  </mat-card>
+  <mat-card class="item">
+    <mat-card-content>Simple card</mat-card-content>
+  </mat-card>
+  <mat-card class="item">
+    <mat-card-content>Simple card</mat-card-content>
+  </mat-card>
+</section>

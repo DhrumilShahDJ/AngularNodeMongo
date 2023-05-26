@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+<section class="loginform">
+  <mat-card>
+    <div>
+      <h2>Login</h2>
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" formControlName="email" type="email"/>
+            <mat-error
+              *ngIf="
+                loginForm.get('email').invalid &&
+                (loginForm.get('email').dirty || loginForm.get('email').touched)
+              "
+              >{{ getErrorMessage() }}</mat-error
+            >
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" formControlName="password" type="password"/>
+            <mat-error
+              *ngIf="
+                loginForm.get('password').invalid &&
+                (loginForm.get('password').dirty ||
+                  loginForm.get('password').touched)
+              "
+              >{{ getErrorMessage() }}</mat-error
+            >
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Login</button>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</section>

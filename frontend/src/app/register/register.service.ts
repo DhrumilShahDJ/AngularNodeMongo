@@ -3,16 +3,16 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RegisterResponse } from '../interfaces/register.interface';
 import { User } from '../interfaces/user.interface';
+import { environment } from 'src/environments/environment';
+const API_BASE = environment.apiBase;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RegisterService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  register(body: User): Observable<RegisterResponse>{
-    console.log("222", body);
-    return this.http.post<RegisterResponse>('http://localhost:8080/api/register', body)
+  register(body: User): Observable<RegisterResponse> {
+    return this.http.post<RegisterResponse>(`${API_BASE}/register`, body);
   }
 }

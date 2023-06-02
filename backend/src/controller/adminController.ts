@@ -61,7 +61,6 @@ export const createRole: RequestHandler = async (
   next: NextFunction
 ) => {
   const { name, level } = req.body;
-  console.log("111", name, level, RoleLevel.find(data => data._id === level));
   await roleModel
     .create({
       name: name,

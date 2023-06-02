@@ -55,9 +55,17 @@ export class RoleComponent implements OnInit {
   }
 
   openEditDialog(data: RoleRequest): void {
-    debugger;
     const dialogRef = this.dialog.open(DialogRoleEdit, {
       data: data,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getRoles();
+    });
+  }
+
+  openAddDialog(): void {
+    const dialogRef = this.dialog.open(DialogRoleEdit, {
+      data: { _id: null, name: null, level: null, isActive: null },
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.getRoles();
@@ -82,6 +90,9 @@ export class RoleComponent implements OnInit {
 export class DialogRoleEdit implements OnInit {
   editRoleForm: FormGroup;
   roleLevels: RoleLevel[];
+  formTitle: string;
+  formButton: string;
+  buttonAction: string;
 
   constructor(
     private _fb: FormBuilder,
@@ -92,6 +103,14 @@ export class DialogRoleEdit implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (this.data.name) {
+      this.formTitle = 'Edit';
+      this.formButton = 'Edit';
+    } else {
+      this.formTitle = 'Add';
+      this.formButton = 'Add';
+      this.buttonAction = 'add';
+    }
     this.editRoleForm = this._fb.group({
       name: [
         this.data.name,
@@ -101,10 +120,9 @@ export class DialogRoleEdit implements OnInit {
           Validators.minLength(3),
         ],
       ],
-      level: [this.data.level._id, [Validators.required]],
+      level: [this.data.level?._id, [Validators.required]],
     });
     this.getRoleLevels();
-
   }
 
   getRoleLevels(): void {
@@ -116,6 +134,17 @@ export class DialogRoleEdit implements OnInit {
   edit() {
     this.roleService
       .updateRole(this.editRoleForm.value, this.data._id)
+      .subscribe((result: RoleResponse) => {
+        if (result.statusCode === 200) {
+          this.commonService.notificationHandler(result.message);
+          this.dialogRef.close();
+        }
+      });
+  }
+
+  add() {
+    this.roleService
+      .createRole(this.editRoleForm.value)
       .subscribe((result: RoleResponse) => {
         if (result.statusCode === 200) {
           this.commonService.notificationHandler(result.message);

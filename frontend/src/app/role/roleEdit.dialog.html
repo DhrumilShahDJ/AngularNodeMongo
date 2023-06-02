@@ -1,8 +1,11 @@
 <section>
   <div>
-    <h2>Edit</h2>
+    <h2>{{formTitle}}</h2>
   </div>
-  <form [formGroup]="editRoleForm" (ngSubmit)="edit()">
+  <form
+    [formGroup]="editRoleForm"
+    (ngSubmit)="buttonAction === 'add'? add() : edit()"
+  >
     <div class="row">
       <div class="col">
         <mat-form-field>
@@ -47,7 +50,7 @@
           type="submit"
           [disabled]="editRoleForm.invalid"
         >
-          Edit
+          {{formButton}}
         </button>
         <button mat-raised-button color="warn" (click)="cancel()" type="button">
           Cancel

@@ -37,7 +37,6 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
-    console.log("111");
     this.registerService
       .register(this.registerForm.value)
       .subscribe((result: RegisterResponse) => {

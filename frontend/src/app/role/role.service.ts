@@ -14,7 +14,6 @@ export class RoleService {
   }
 
   updateRole(body: Role, id: string): Observable<RoleResponse> {
-    debugger;
     return this.http.put<RoleResponse>(`http://localhost:8080/api/updateRole/${id}`, body);
   }
 

@@ -94,3 +94,32 @@ export const login: RequestHandler = async (
       res.json(err);
     });
 };
+
+export const forgotPassword: RequestHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { email, password } = req.body;
+  await userModel.find({ email: email }).then((user: User[]) => {
+    if (user.length) {
+      bcrypt.hash(password, 10, (err, hashedPassword) => {
+        if (err) {
+          res.json(err);
+        } else {
+          userModel
+            .updateOne({ email: user[0].email }, { password: hashedPassword })
+            .then(() =>
+              res.json({
+                message: "Password Updated Successfully!",
+                statusCode: 200,
+              })
+            )
+            .catch((err) => res.json(err));
+        }
+      });
+    } else {
+      res.json({ message: "Email does not exists", statusCode: 404 });
+    }
+  });
+};

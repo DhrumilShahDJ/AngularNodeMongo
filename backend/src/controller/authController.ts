@@ -61,7 +61,7 @@ export const login: RequestHandler = async (
       if (user.length) {
         bcrypt.compare(password, user[0].password, (err, result) => {
           if (err) {
-            res.json({ message: "Password does not match", statusCode: 401 });
+            res.json(err);
           }
           if (result === true) {
             roleModel
@@ -84,6 +84,8 @@ export const login: RequestHandler = async (
                 });
               })
               .catch((err) => res.json(err));
+          } else {
+            res.json({ message: "Password does not match", statusCode: 401 });
           }
         });
       } else {

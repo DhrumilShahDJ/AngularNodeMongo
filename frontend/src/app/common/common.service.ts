@@ -15,6 +15,8 @@ export class CommonService {
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   pageSize: number = 10;
   pageSizeOptions: Array<number> = [10, 50, 100];
+  isLogin: boolean = false;
+  decodedToken: JwtDecode;
 
   constructor(private _snackBar: MatSnackBar) {}
 
@@ -32,5 +34,15 @@ export class CommonService {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
+  }
+
+  isLoggedin(): JwtDecode {
+    if ('token' in localStorage) {
+      this.decodedToken = this.DecodeToken(this.getToken());
+      if (this.decodedToken.isLogin) {
+        return this.decodedToken;
+      }
+    }
+    return null;
   }
 }

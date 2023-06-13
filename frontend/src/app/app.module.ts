@@ -23,6 +23,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogRoleEdit, RoleComponent } from './role/role.component';
 import { MatSelectModule } from '@angular/material/select';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { MatSelectModule } from '@angular/material/select';
     DialogEdit,
     RoleComponent,
     DialogRoleEdit,
+    ForgotpasswordComponent,
   ],
   imports: [
     BrowserModule,

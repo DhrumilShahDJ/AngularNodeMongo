@@ -1,5 +1,10 @@
 <app-navbar></app-navbar>
 <section>
+  <div class="demo-button-container">
+    <button mat-raised-button color="primary" (click)="openAddDialog()" class="demo-button">
+      Add data
+    </button>
+  </div>
   <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Name</th>

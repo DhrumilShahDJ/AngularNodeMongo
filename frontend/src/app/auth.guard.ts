@@ -25,7 +25,6 @@ export class AuthGuard implements CanActivate {
     | UrlTree {
     if (this.commonService.isLoggedin().isLogin) {
       const userRole = this.commonService.isLoggedin().role;
-      debugger;
       if (userRole !== route.data['role']) {
         this.router.navigate(['/']);
         return false;

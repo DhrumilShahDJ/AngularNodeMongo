@@ -5,3 +5,10 @@ export interface User extends Document {
   isActive: boolean;
   role: string;
 }
+
+export interface ExpiredToken extends Document {
+  email: string;
+  isLogin: boolean;
+  name: string;
+  role: number;
+}

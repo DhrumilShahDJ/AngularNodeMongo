@@ -125,3 +125,22 @@ export const forgotPassword: RequestHandler = async (
     }
   });
 };
+
+export const refreshToken: RequestHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { email, isLogin, name, role } = req.body;
+  const token = jwt.sign(
+    {
+      email,
+      isLogin,
+      name,
+      role,
+    },
+    "secretkey",
+    { expiresIn: "1d" }
+  );
+  res.json(token);
+};

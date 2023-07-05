@@ -6,6 +6,10 @@ import {
 } from '@angular/material/snack-bar';
 import jwt_decode from 'jwt-decode';
 import { JwtDecode } from '../interfaces/jwt.interface';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+const API_BASE = environment.apiBase;
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +22,7 @@ export class CommonService {
   isLogin: boolean = false;
   decodedToken: JwtDecode;
 
-  constructor(private _snackBar: MatSnackBar) {}
+  constructor(private _snackBar: MatSnackBar, private http: HttpClient) {}
 
   DecodeToken(token: string): JwtDecode {
     return jwt_decode(token);
@@ -44,5 +48,9 @@ export class CommonService {
       }
     }
     return null;
+  }
+
+  getRefreshToken(body: JwtDecode): Observable<String> {
+    return this.http.post<String>(`${API_BASE}/getRefreshToken`, body);
   }
 }

@@ -17,7 +17,7 @@ app.use(bodyparser.urlencoded());
 app.use(bodyparser.json());
 app.use(cors());
 
-app.listen(PORT, () => console.log("Server run on 8080"));
+app.listen(PORT, () => console.log(`Server run on ${PORT}`));
 
 app.use("/api", authRoute);
 app.use("/api", adminRoute);

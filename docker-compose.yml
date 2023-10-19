@@ -1,20 +1,25 @@
 version: '3'
 services:
-  # angular-app:
-  #   image: frontend
-  #   ports:
-  #     - "4200:4200"
-  #   depends_on:
-  #     - nodejs-app
+  angular-app:
+    build:
+      context: ./frontend
+    image: frontend:latest
+    ports:
+      - "4200:4200"
+    depends_on:
+      - nodejs-app
 
   nodejs-app:
-    image: backend
-    ports:
-      - "3000:3000"
+    build:
+      context: ./backend
+    image: backend:latest
+    # ports:
+    #   - "3000:3000"
+    network_mode: "host"
     depends_on:
       - mongodb
 
   mongodb:
     image: mongo
     ports:
-      - "27017:27017"
+      - "27018:27017"

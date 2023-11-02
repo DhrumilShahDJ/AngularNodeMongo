@@ -24,6 +24,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DialogRoleEdit, RoleComponent } from './role/role.component';
 import { MatSelectModule } from '@angular/material/select';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { ConfirmdeleteComponent } from './confirmdelete/confirmdelete.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
     RoleComponent,
     DialogRoleEdit,
     ForgotpasswordComponent,
+    ConfirmdeleteComponent,
   ],
   imports: [
     BrowserModule,

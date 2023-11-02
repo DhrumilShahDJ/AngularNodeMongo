@@ -1,0 +1,13 @@
+<div class="modal">
+  <div class="modal-content">
+    <p>Are you sure you want to delete the user: '{{ deletedUser.name }}'</p>
+    <div class="modal-actions">
+      <button class="btn-ok" (click)="onConfirmation(true)">
+        OK
+      </button>
+      <button class="btn-cancel" (click)="onConfirmation(false)">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

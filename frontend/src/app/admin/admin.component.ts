@@ -36,6 +36,8 @@ export class AdminComponent implements OnInit, AfterViewInit {
   pageSizeOptions: Array<number>;
   dataSource = new MatTableDataSource<User>(this.responseData);
   userRoles: Array<RoleRequest> = [];
+  showConfirmDelete: boolean = false;
+  deletedUser: SendUpdatedUser;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -74,11 +76,21 @@ export class AdminComponent implements OnInit, AfterViewInit {
   }
 
   delete(data: SendUpdatedUser): void {
-    const { _id } = data;
-    this.adminService.deleteUser(data, _id).subscribe((result: UpdateUser) => {
-      this.commonService.notificationHandler(result.message);
-      this.getUser();
-    });
+    this.showConfirmDelete = true;
+    this.deletedUser = data;
+  }
+
+  onConfirm(status: boolean) {
+    this.showConfirmDelete = false;
+    if (status) {
+      const { _id } = this.deletedUser;
+      this.adminService
+        .deleteUser(this.deletedUser, _id)
+        .subscribe((result: UpdateUser) => {
+          this.commonService.notificationHandler(result.message);
+          this.getUser();
+        });
+    }
   }
 
   getAllRoles(): void {

@@ -32,3 +32,4 @@
   >
   </mat-paginator>
 </section>
+<app-confirmdelete *ngIf="showConfirmDelete" [deletedUser]="deletedUser" (confirmationStatus)="onConfirm($event)"></app-confirmdelete>
